@@ -1,0 +1,12 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import TicketPaymentStatus from "../../components/TicketPaymentStatus.jsx";
+---
+
+<BaseLayout title="Statut de l'achat de ticket – Miss Gbévivi Bénin" description="Vérifiez le statut de votre paiement de ticket.">
+  <main class="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl">
+      <TicketPaymentStatus client:load />
+    </div>
+  </main>
+</BaseLayout>

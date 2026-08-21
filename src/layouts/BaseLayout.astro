@@ -1,0 +1,175 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import GlobalLoader from '../components/GlobalLoader.jsx';
+import '../styles/global.css';
+
+// Props
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  author?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article' | 'profile';
+  twitterCard?: 'summary' | 'summary_large_image';
+  robots?: string;
+  canonical?: string;
+  structuredData?: any;
+}
+
+// Détection automatique des pages à ne pas indexer
+const currentPath = Astro.url.pathname;
+
+const autoRobots =
+  currentPath.startsWith('/manager') ||
+  currentPath.startsWith('/register')
+    ? 'noindex,nofollow,noarchive,nosnippet'
+    :'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
+
+const {
+  title = "Miss Gbévivi Bénin 2026",
+  description = "Concours Miss Gbévivi Bénin 2026. Découvrez les candidates, votez en ligne et soutenez la culture béninoise.",
+  keywords = "Miss Gbévivi Bénin, Miss Gbévivi Bénin 2026, culture béninoise, patrimoine béninois, concours culturel",
+  author = "Miss Gbévivi Bénin",
+  ogTitle = title,
+  ogDescription = description,
+  // Logo officiel, recadré au ratio Open Graph (1200x630) — les pages
+  // candidat écrasent déjà cette valeur par défaut avec leur propre photo.
+  ogImage = "https://res.cloudinary.com/di21pnpda/image/upload/w_1200,h_630,c_fill,g_auto,f_auto,q_auto/v1787167088/6cdbf38186fd8d60e998375a20814d19_1_aambng.jpg",
+  ogType = "website",
+  twitterCard = "summary_large_image",
+  robots = autoRobots,
+  canonical = new URL(Astro.url.pathname, Astro.site).toString(),
+  structuredData = null,
+} = Astro.props;
+
+// Données structurées par défaut (Organisation + WebSite)
+const defaultStructuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://missgbevivibenin.site/#organization",
+      "name": "Miss Gbévivi Bénin",
+      
+      "description": "Concours culturel béninois promouvant le patrimoine culturel, les traditions et la jeunesse béninoise",
+      "url": "https://missgbevivibenin.site",
+      "logo": "https://res.cloudinary.com/di21pnpda/image/upload/f_auto,q_auto/v1787167088/6cdbf38186fd8d60e998375a20814d19_1_aambng.jpg",
+      // Pas de coordonnées confirmées pour l'instant — champs volontairement
+      // omis plutôt qu'inventés (voir aussi Header.astro et Footer.astro).
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Service",
+        "areaServed": "BJ",
+        "availableLanguage": "fr"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "BJ"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://missgbevivibenin.site/#website",
+      "url": "https://missgbevivibenin.site",
+      "name": "Miss Gbévivi Bénin",
+      "description": title,
+      "inLanguage": "fr",
+      "publisher": {
+        "@id": "https://missgbevivibenin.site/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://missgbevivibenin.site/?s={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+};
+---
+
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <!-- Meta fondamentales -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Title et Description -->
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="keywords" content={keywords} />
+  <meta name="author" content={author} />
+
+  <!-- Canonical -->
+  <link rel="canonical" href={canonical} />
+
+  <!-- Robots SEO -->
+  <meta name="robots" content={robots} />
+  <meta name="googlebot" content={robots} />
+  <meta name="bingbot" content={robots} />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={ogTitle} />
+  <meta property="og:description" content={ogDescription} />
+  <meta property="og:type" content={ogType} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Miss Gbévivi Bénin" />
+  <meta property="og:locale" content="fr_BJ" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content={twitterCard} />
+  <meta name="twitter:title" content={ogTitle} />
+  <meta name="twitter:description" content={ogDescription} />
+  <meta name="twitter:image" content={ogImage} />
+
+  <!-- Sécurité & Performance -->
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#D4AF37" />
+
+  <!-- Mobile -->
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+  <!-- Favicons — logo officiel recadré en carré via Cloudinary -->
+  <link rel="icon" href="https://res.cloudinary.com/di21pnpda/image/upload/w_64,h_64,c_fill,g_auto,f_auto,q_auto/v1787167088/6cdbf38186fd8d60e998375a20814d19_1_aambng.jpg" type="image/jpeg" />
+  <link rel="apple-touch-icon" href="https://res.cloudinary.com/di21pnpda/image/upload/w_180,h_180,c_fill,g_auto,f_auto,q_auto/v1787167088/6cdbf38186fd8d60e998375a20814d19_1_aambng.jpg" />
+
+  <!-- Sitemap -->
+  <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+
+  <!-- Données structurées -->
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(structuredData || defaultStructuredData)}
+  />
+</head>
+
+<body class="bg-gray-50 text-gray-900 antialiased">
+
+  <!-- Loader -->
+  <GlobalLoader client:load />
+
+  <!-- Header -->
+  <Header />
+
+  <!-- Contenu -->
+  <main class="min-h-screen">
+    <slot />
+  </main>
+
+  <!-- Footer -->
+  <Footer />
+
+</body>
+</html>

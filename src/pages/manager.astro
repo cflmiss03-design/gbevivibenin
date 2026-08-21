@@ -1,0 +1,12 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ManagerDashboard from "../components/ManagerDashboard.jsx";
+---
+
+<BaseLayout
+  title="Espace Manager – Miss Gbévivi Bénin"
+  description="Tableau de bord d'administration : candidates, retraits, tickets."
+  robots="noindex,nofollow"
+>
+  <ManagerDashboard client:load />
+</BaseLayout>

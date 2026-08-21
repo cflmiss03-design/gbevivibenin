@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import OfficialResults from '../components/OfficialResults.jsx';
+
+const title = "Résultats Officiels – Miss Gbévivi Bénin 2026";
+const description = "Découvrez le classement officiel et les résultats détaillés par épreuve du concours Miss Gbévivi Bénin 2026.";
+const keywords = "résultats Miss Gbévivi Bénin, classement officiel, épreuves, palmarès, concours beauté Bénin";
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  ogTitle={title}
+  ogDescription={description}
+  ogType="website"
+  robots="index, follow"
+>
+  <main class="min-h-screen bg-gradient-primary">
+    <div class="px-4 pt-10 text-center sm:pt-14">
+      <p class="text-sm font-semibold uppercase tracking-widest text-white/70">Miss Gbévivi Bénin 2026</p>
+      <h1 class="mt-2 font-heading text-4xl font-extrabold text-white sm:text-5xl">Résultats Officiels</h1>
+      <div class="mx-auto mt-4 h-1 w-20 rounded-full bg-gradient-secondary"></div>
+    </div>
+    <OfficialResults client:load />
+  </main>
+</BaseLayout>

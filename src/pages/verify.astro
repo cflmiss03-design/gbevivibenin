@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TicketVerify from "../components/TicketVerify.jsx";
+---
+
+<BaseLayout
+  title="Vérification de ticket – Miss Gbévivi Bénin"
+  description="Vérifiez l'authenticité d'un ticket Miss Gbévivi Bénin."
+  robots="noindex,nofollow"
+>
+  <main class="min-h-screen bg-slate-50 py-16 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+    <div class="mx-auto max-w-lg w-full bg-white rounded-2xl shadow-lg border border-slate-200 p-8">
+      <TicketVerify client:load />
+    </div>
+  </main>
+</BaseLayout>

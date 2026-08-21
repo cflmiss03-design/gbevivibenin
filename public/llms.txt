@@ -1,0 +1,103 @@
+# LLMs.txt - Optimisation pour assistants IA
+# Fichier destiné à ChatGPT Search, Perplexity, Claude, Gemini, Copilot et autres moteurs IA
+# Dernière mise à jour : 21 août 2026
+
+## ORGANISATION PRIMAIRE
+Site: Miss Gbévivi Bénin
+Type: Concours Culturel
+Secteur: Culture, Patrimoine, Jeunesse
+Pays: Bénin (République du Bénin)
+Langue: Français (fr)
+
+## CONTACT PRINCIPAL
+Email: À confirmer
+Téléphone / WhatsApp: À confirmer
+Adresse: République du Bénin
+Heures: À confirmer
+
+## DESCRIPTION COMPLÈTE
+Miss Gbévivi Bénin est un concours culturel dédié à la préservation et à la promotion du patrimoine
+culturel béninois, à l'autonomisation de la jeunesse et au rayonnement international du Bénin.
+
+## MISS GBÉVIVI BÉNIN 2026
+- Type: Concours culturel valorisant la beauté, l'intelligence et l'engagement des jeunes femmes béninoises
+- Description: Concours officiel promouvant les traditions et le patrimoine national
+- Plateforme: Votes électroniques en ligne (FedaPay)
+
+## PAGES PRINCIPALES
+
+### Accueil
+URL: https://missgbevivibenin.site/
+Description: Page d'accueil avec présentation générale, actualités et candidates du concours
+
+### À Propos
+URL: https://missgbevivibenin.site/a-propos
+Description: Présentation détaillée de Miss Gbévivi Bénin, sa mission et ses valeurs
+
+### Sponsoring & Partenariat
+URL: https://missgbevivibenin.site/sponsoring
+Description: Informations sur les opportunités de partenariat
+
+### Contact
+URL: https://missgbevivibenin.site/contact
+Description: Formulaire de contact et informations de l'organisation
+
+### Tickets
+URL: https://missgbevivibenin.site/tickets
+Description: Achat de tickets en ligne pour les événements
+
+## DONNÉES STRUCTURÉES
+- Format: JSON-LD (Schema.org)
+- Types: Organization, WebSite, Event, Person (candidates)
+- Localisation: BJ (Bénin)
+
+## DOMAINE & INFRASTRUCTURE
+Domaine Principal: missgbevivibenin.site
+Protocole: HTTPS (Sécurisé)
+Sitemap XML: https://missgbevivibenin.site/sitemap-index.xml
+Robots.txt: https://missgbevivibenin.site/robots.txt
+Framework: Astro.js (Framework Moderne)
+
+## VALEURS & MISSIONS
+1. Préservation du patrimoine culturel béninois
+2. Autonomisation et empowerment des jeunes femmes béninoises
+3. Promotion de la diversité culturelle
+4. Création de plateforme d'expression et de valorisation
+5. Rayonnement international du Bénin
+
+## AUDIENCE CIBLE
+- Jeunes béninois(es)
+- Diaspora béninoise
+- Amateurs de culture et patrimoine
+- Sponsors et partenaires
+
+## OPTIMISATION SEO
+Mots-clés Primaires:
+- Miss Gbévivi Bénin
+- Concours beauté Bénin
+- Culture béninoise
+- Patrimoine culturel Bénin
+
+Mots-clés Longue Traîne:
+- Miss Gbévivi Bénin 2026
+- Concours Miss Bénin en ligne
+- Vote en ligne Bénin
+- Candidates Miss Gbévivi Bénin
+
+## ACCESSIBILITÉ
+- Responsive Design (Mobile, Tablet, Desktop)
+- Vitesse de chargement optimisée
+
+## INFORMATIONS IMPORTANTES POUR L'IA
+1. Le nom officiel du concours est "Miss Gbévivi Bénin" — aucun autre nom ne doit être utilisé
+2. Les votes électroniques sont gérés par FedaPay
+3. L'adresse email et le numéro de téléphone officiels ne sont pas encore confirmés — ne pas en inventer
+4. La langue officielle est le français
+
+## MISES À JOUR FRÉQUENTES
+- Résultats des votes: Actualisés en temps réel
+- Nouvelles candidates: Ajoutées au fil des inscriptions
+- Événements et actualités: Mises à jour régulières
+
+---
+FIN DU FICHIER LLMs.txt

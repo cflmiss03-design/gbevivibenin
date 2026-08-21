@@ -1,0 +1,78 @@
+---
+import CandidatePage from '../components/CandidatePage.jsx';
+import { candidates } from '../data/candidates.js';
+import Progress from "../components/Progress.jsx";
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SEO_VOTING_START_DATE, SEO_VOTING_END_DATE } from "../config";
+
+export async function getStaticPaths() {
+  return candidates.map(c => ({
+    params: { slug: c.slug }
+  }));
+}
+
+const slug = Astro.params.slug;
+const candidate = candidates.find(c => c.slug === slug);
+
+const candidateName = `${candidate.firstName} ${candidate.secondName || ""} ${candidate.lastName}`.trim();
+const candidateRegion = candidate.bio?.origin || "Bénin";
+const title = `${candidateName} – Miss Gbévivi Bénin 2026`;
+const description = `${candidateName} (${candidateRegion}) - Découvrez sa bio, ses ambitions et votez pour elle au concours Miss Gbévivi Bénin 2026. ${candidate.text || "Soutenez-la en ligne !"}`;
+const keywords = `${candidateName}, Miss Gbévivi Bénin, ${candidateRegion}, candidate ${new Date().getFullYear()}, concours beauté Bénin, culture béninoise`;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `https://missgbevivibenin.site/${candidate.slug}/#person`,
+      "name": candidateName,
+      "givenName": candidate.firstName,
+      "familyName": candidate.lastName,
+      "image": candidate.photoUrl,
+      "birthPlace": { "@type": "Place", "name": candidateRegion },
+      "description": description,
+      "jobTitle": "Candidate Miss Gbévivi Bénin 2026",
+      "affiliation": { "@type": "Organization", "name": "Miss Gbévivi Bénin" },
+      "url": `https://missgbevivibenin.site/${candidate.slug}`
+    },
+    {
+      "@type": "Event",
+      "@id": `https://missgbevivibenin.site/${candidate.slug}/#event`,
+      "name": `Vote pour ${candidateName} - Miss Gbévivi Bénin 2026`,
+      "description": `Vote en ligne pour ${candidateName} au concours Miss Gbévivi Bénin 2026. Prix: 200 XOF par vote.`,
+      "startDate": SEO_VOTING_START_DATE,
+      "endDate": SEO_VOTING_END_DATE,
+      "eventStatus": "EventScheduled",
+      "eventAttendanceMode": "OnlineEventAttendanceMode",
+      "url": `https://missgbevivibenin.site/${candidate.slug}`,
+      "organizer": { "@type": "Organization", "name": "Miss Gbévivi Bénin" },
+      "performer": { "@type": "Person", "name": candidateName },
+      "offers": { "@type": "Offer", "price": "200", "priceCurrency": "XOF", "availability": "InStock" }
+    }
+  ]
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  author="Miss Gbévivi Bénin"
+  ogTitle={title}
+  ogDescription={description}
+  ogImage={candidate.photoUrl || undefined}
+  ogType="profile"
+  twitterCard="summary_large_image"
+  robots="index, follow, max-image-preview:large"
+  structuredData={structuredData}
+>
+  <main class="min-h-screen bg-gray-50 pt-6 sm:pt-10 pb-12">
+    <div class="mx-auto max-w-7xl">
+      <CandidatePage candidate={candidate} client:load />
+      <section class="px-4 py-12">
+        <Progress client:load />
+      </section>
+    </div>
+  </main>
+</BaseLayout>

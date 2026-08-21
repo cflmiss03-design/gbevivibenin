@@ -1,0 +1,194 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = "Sponsoring & Partenariat – Miss Gbévivi Bénin";
+const description = "Devenez partenaire de Miss Gbévivi Bénin. Opportunités de sponsoring, visibilité nationale et engagement pour la culture béninoise.";
+const keywords = "sponsoring Bénin, partenariat culturel, sponsoring Miss Gbévivi Bénin, collaboration Bénin";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://missgbevivibenin.site/sponsoring/#webpage",
+      "name": "Sponsoring & Partenariat",
+      "url": "https://missgbevivibenin.site/sponsoring",
+      "isPartOf": {
+        "@id": "https://missgbevivibenin.site/#website"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://missgbevivibenin.site/sponsoring/#organization",
+      "name": "Miss Gbévivi Bénin",
+      "url": "https://missgbevivibenin.site",
+      "description": "Concours recherchant des partenaires pour soutenir Miss Gbévivi Bénin"
+    }
+  ]
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  ogTitle={title}
+  ogDescription={description}
+  ogType="website"
+  structuredData={structuredData}
+>
+  <main class="min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-5xl animate-fade-up">
+      <div class="mb-12 space-y-4 text-center">
+        <p class="text-sm font-semibold uppercase tracking-widest text-primary-600">Soyez Partenaire</p>
+        <h1 class="text-4xl md:text-5xl font-heading font-bold text-slate-900">
+          Partenariat & Sponsoring
+        </h1>
+        <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+          Rejoignez-nous dans notre mission de préservation et promotion du patrimoine culturel béninois
+        </p>
+      </div>
+
+      <!-- Pourquoi devenir partenaire -->
+      <div class="mb-16 rounded-2xl bg-gradient-to-br from-primary-50 to-secondary-50 border border-primary-200 p-8">
+        <h2 class="text-3xl font-bold text-slate-900 mb-8">Pourquoi Devenir Partenaire de Miss Gbévivi Bénin ?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="flex gap-4">
+            <div class="flex-shrink-0">
+              <div class="w-12 h-12 rounded-lg bg-primary-600 text-white flex items-center justify-center font-bold text-lg">
+                📣
+              </div>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-900 text-lg mb-2">Visibilité Nationale</h3>
+              <p class="text-slate-600">
+                Accès à des milliers de participants et spectateurs à travers les événements de Miss Gbévivi Bénin.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="flex-shrink-0">
+              <div class="w-12 h-12 rounded-lg bg-primary-600 text-white flex items-center justify-center font-bold text-lg">
+                🤝
+              </div>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-900 text-lg mb-2">Réseautage Professionnel</h3>
+              <p class="text-slate-600">
+                Connexions stratégiques avec les leaders culturels, entrepreneurs et décideurs béninois.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="flex-shrink-0">
+              <div class="w-12 h-12 rounded-lg bg-secondary-600 text-white flex items-center justify-center font-bold text-lg">
+                🌍
+              </div>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-900 text-lg mb-2">Impact Culturel</h3>
+              <p class="text-slate-600">
+                Contribuez à la préservation du patrimoine béninois et à la formation de la jeunesse.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="flex-shrink-0">
+              <div class="w-12 h-12 rounded-lg bg-secondary-600 text-white flex items-center justify-center font-bold text-lg">
+                👑
+              </div>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-900 text-lg mb-2">Soutien à la Jeunesse</h3>
+              <p class="text-slate-600">
+                Alignez votre marque avec des valeurs de soutien à la jeunesse béninoise engagée.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="flex-shrink-0">
+              <div class="w-12 h-12 rounded-lg bg-primary-600 text-white flex items-center justify-center font-bold text-lg">
+                🇧🇯
+              </div>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-900 text-lg mb-2">Rayonnement National</h3>
+              <p class="text-slate-600">
+                Participez à la promotion du Bénin au plan national et international à travers la culture.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="flex-shrink-0">
+              <div class="w-12 h-12 rounded-lg bg-primary-600 text-white flex items-center justify-center font-bold text-lg">
+                📈
+              </div>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-900 text-lg mb-2">Retour sur Investissement</h3>
+              <p class="text-slate-600">
+                Exposition médiatique, présence sur réseaux sociaux et événements de haut profil.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Partenariats sur mesure — pas de grille tarifaire fixe pour
+           l'instant (les montants FCFA affichés ici auparavant étaient
+           ceux d'un autre concours, retirés plutôt que réutilisés à
+           l'aveugle). Chaque partenariat se discute directement. -->
+      <div class="mb-16 rounded-2xl bg-gradient-to-r from-secondary-600 to-secondary-800 text-white p-12 text-center">
+        <h2 class="text-3xl font-bold mb-4">Intéressé par un Partenariat ?</h2>
+        <p class="text-lg mb-8 text-white/90 max-w-2xl mx-auto">
+          Chaque partenariat est discuté sur mesure, selon vos objectifs et votre budget. Contactez-nous pour en parler.
+        </p>
+        <a
+          href="/contact"
+          class="inline-block bg-white text-secondary-600 font-semibold px-8 py-3 rounded-lg hover:bg-secondary-50 transition-colors"
+        >
+          Nous écrire
+        </a>
+      </div>
+
+      <!-- FAQ -->
+      <div class="mt-16">
+        <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">Questions Fréquemment Posées</h2>
+        <div class="space-y-4">
+          <div class="rounded-lg border border-slate-200 p-6">
+            <h3 class="font-bold text-slate-900 mb-2">Quels types de partenariat proposez-vous ?</h3>
+            <p class="text-slate-600">
+              Chaque partenariat est adapté au budget et aux objectifs du partenaire — contactez-nous pour en discuter.
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-slate-200 p-6">
+            <h3 class="font-bold text-slate-900 mb-2">Quelle est la durée d'un partenariat ?</h3>
+            <p class="text-slate-600">
+              Les partenariats sont généralement annuels, renouvelables. Des partenariats sur événement spécifique sont également disponibles.
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-slate-200 p-6">
+            <h3 class="font-bold text-slate-900 mb-2">Comment bénéficie-t-on de la visibilité médiatique ?</h3>
+            <p class="text-slate-600">
+              Votre marque apparaît sur le site web, réseaux sociaux, bannières d'événements, bulletins de presse et matériels promotionnels de Miss Gbévivi Bénin.
+            </p>
+          </div>
+
+          <div class="rounded-lg border border-slate-200 p-6">
+            <h3 class="font-bold text-slate-900 mb-2">Pouvez-vous proposer des partenariats flexibles ?</h3>
+            <p class="text-slate-600">
+              Oui ! Nous nous adaptons à vos besoins spécifiques. Contactez-nous pour discuter d'une formule personnalisée.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</BaseLayout>

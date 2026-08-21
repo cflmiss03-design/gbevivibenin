@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = "Galerie – Miss Gbévivi Bénin";
+const description = "Découvrez en images les moments marquants du concours Miss Gbévivi Bénin.";
+const keywords = "galerie Miss Gbévivi Bénin, photos concours Bénin, Miss Gbévivi Bénin images";
+
+// Insère une transformation Cloudinary (recadrage carré + format/qualité
+// auto) directement dans l'URL fournie, pour ne charger que des vignettes
+// légères sur la grille — le clic ouvre la photo en pleine résolution dans
+// un nouvel onglet.
+function thumb(url) {
+  return url.replace("/upload/", "/upload/w_500,h_500,c_fill,g_auto,f_auto,q_auto/");
+}
+
+const PHOTOS = [
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167088/WhatsApp_Image_2026-08-19_at_20.04.19_lhfiw1.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167088/WhatsApp_Image_2026-08-19_at_20.04.20_m2aopc.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167089/WhatsApp_Image_2026-08-19_at_20.04.21_jh3eb2.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167090/WhatsApp_Image_2026-08-19_at_20.04.23_1_ljjz18.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167091/WhatsApp_Image_2026-08-19_at_20.04.23_joostz.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167093/WhatsApp_Image_2026-08-19_at_20.04.27_jepf3m.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167095/WhatsApp_Image_2026-08-19_at_20.04.25_uun3iz.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167098/WhatsApp_Image_2026-08-19_at_20.04.17_wi1hfy.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167098/WhatsApp_Image_2026-08-19_at_20.04.18_bhuxvk.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167098/WhatsApp_Image_2026-08-19_at_20.04.33_1_zlaaxx.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167099/WhatsApp_Image_2026-08-19_at_20.04.37_1_rb5pu9.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167100/WhatsApp_Image_2026-08-19_at_20.04.37_ptf2cj.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167100/WhatsApp_Image_2026-08-19_at_20.04.39_pzbsvk.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167100/WhatsApp_Image_2026-08-19_at_20.04.40_1_ikqdky.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167101/WhatsApp_Image_2026-08-19_at_20.04.40_lmws6v.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167101/WhatsApp_Image_2026-08-19_at_20.04.42_pbch6q.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167101/WhatsApp_Image_2026-08-19_at_20.04.43_1_rassxn.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167101/WhatsApp_Image_2026-08-19_at_20.04.44_1_ejnb0c.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167102/WhatsApp_Image_2026-08-19_at_20.04.41_adlytg.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167102/WhatsApp_Image_2026-08-19_at_20.04.43_f3rkyw.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167102/WhatsApp_Image_2026-08-19_at_20.04.44_aldnpl.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167102/WhatsApp_Image_2026-08-19_at_20.04.45_ehtim0.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167102/WhatsApp_Image_2026-08-19_at_20.04.46_bzfrpq.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167102/WhatsApp_Image_2026-08-19_at_20.04.47_iultnf.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167103/WhatsApp_Image_2026-08-19_at_20.04.49_dful7v.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167103/WhatsApp_Image_2026-08-19_at_20.04.50_1_kqwyzd.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167103/WhatsApp_Image_2026-08-19_at_20.04.50_susvlx.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167103/WhatsApp_Image_2026-08-19_at_20.04.52_1_vodzi5.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167103/WhatsApp_Image_2026-08-19_at_20.04.52_sgyfda.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167104/WhatsApp_Image_2026-08-19_at_20.04.54_pescve.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167104/WhatsApp_Image_2026-08-19_at_20.04.55_fzd6mg.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167105/WhatsApp_Image_2026-08-19_at_20.04.56_pkirdd.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167105/WhatsApp_Image_2026-08-19_at_20.04.57_1_n4zg5b.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167105/WhatsApp_Image_2026-08-19_at_20.04.59_qgeiyj.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167105/WhatsApp_Image_2026-08-19_at_20.05.01_wltlaf.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167105/WhatsApp_Image_2026-08-19_at_20.05.02_rrfgyr.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167106/WhatsApp_Image_2026-08-19_at_20.05.05_vcwjwi.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167106/WhatsApp_Image_2026-08-19_at_20.05.07_1_xuukxr.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167106/WhatsApp_Image_2026-08-19_at_20.05.07_d4cwx7.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167107/WhatsApp_Image_2026-08-19_at_20.05.06_vdxsv1.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167107/WhatsApp_Image_2026-08-19_at_20.05.09_ytdsi9.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167107/WhatsApp_Image_2026-08-19_at_20.05.11_ij6nvy.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167107/WhatsApp_Image_2026-08-19_at_20.05.12_eptr33.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167107/WhatsApp_Image_2026-08-19_at_20.05.13_sd7aof.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167108/WhatsApp_Image_2026-08-19_at_20.05.14_dukoal.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167109/WhatsApp_Image_2026-08-19_at_20.05.15_ds68sf.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167109/WhatsApp_Image_2026-08-19_at_20.05.17_1_hbfqjv.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167109/WhatsApp_Image_2026-08-19_at_20.05.17_t5rwjp.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167109/WhatsApp_Image_2026-08-19_at_20.05.18_hmh9wh.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167109/WhatsApp_Image_2026-08-19_at_20.05.19_jzmk2u.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167109/WhatsApp_Image_2026-08-19_at_20.05.20_fnnp1k.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167110/WhatsApp_Image_2026-08-19_at_20.05.22_1_dtzxve.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167110/WhatsApp_Image_2026-08-19_at_20.05.22_lpmg3u.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167110/WhatsApp_Image_2026-08-19_at_20.05.23_qj0icz.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167110/WhatsApp_Image_2026-08-19_at_20.05.24_mos7qr.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167111/WhatsApp_Image_2026-08-19_at_20.05.25_e7ud8l.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167111/WhatsApp_Image_2026-08-19_at_20.05.27_pbt8dr.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167111/WhatsApp_Image_2026-08-19_at_20.05.28_f5pbjz.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167111/WhatsApp_Image_2026-08-19_at_20.05.29_riwkv2.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167111/WhatsApp_Image_2026-08-19_at_20.05.31_1_dooqon.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167112/WhatsApp_Image_2026-08-19_at_20.05.31_yosmyk.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167112/WhatsApp_Image_2026-08-19_at_20.05.32_pason7.jpg",
+  "https://res.cloudinary.com/di21pnpda/image/upload/v1787167112/WhatsApp_Image_2026-08-19_at_20.05.33_tzbsjm.jpg",
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  ogTitle={title}
+  ogDescription={description}
+  ogType="website"
+>
+  <main class="min-h-screen bg-white">
+    <section class="bg-gradient-primary py-16 sm:py-20 text-white text-center px-4">
+      <p class="text-sm font-semibold uppercase tracking-widest text-white/70">Miss Gbévivi Bénin</p>
+      <h1 class="mt-2 font-heading text-4xl font-black sm:text-5xl">Galerie</h1>
+      <p class="mx-auto mt-3 max-w-2xl text-lg text-white/90">
+        Les moments marquants du concours en images.
+      </p>
+    </section>
+
+    <section class="px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-y-3">
+          {PHOTOS.map((url, i) => (
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group block aspect-square overflow-hidden rounded-xl shadow-sm hover:shadow-lg transition-shadow"
+              aria-label="Voir la photo en pleine résolution"
+            >
+              <img
+                src={thumb(url)}
+                alt="Miss Gbévivi Bénin"
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                loading={i < 10 ? "eager" : "lazy"}
+              />
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
