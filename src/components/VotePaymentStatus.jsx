@@ -37,7 +37,12 @@ export default function VotePaymentStatus() {
         {view === "success" && (
           <SuccessView transactionId={transactionId} onRetry={retry} />
         )}
-        {view === "cancelled" && <CancelledView onRetry={retry} />}
+        {view === "cancelled" && (
+          <CancelledView
+            onRetry={retry}
+            primaryHref="https://process.fedapay.com/mobile-money"
+          />
+        )}
         {view === "error" && <ErrorView onRetry={retry} />}
       </div>
 

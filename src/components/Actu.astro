@@ -1,3 +1,7 @@
+---
+import VotingPeriodBadge from "./VotingPeriodBadge.jsx";
+---
+
 <section class="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white via-slate-50 to-white overflow-hidden">
 
   <!-- Background Decoration -->
@@ -125,14 +129,14 @@
 
             <div class="space-y-4">
 
-              <!-- Dates et tarif à confirmer — voir Progress.jsx pour la
-                   période de vote réelle, pilotée depuis l'admin. -->
+              <!-- Dates réelles, même source que la barre de progression
+                   (Progress.jsx) : période pilotée depuis le manager. -->
               <div class="rounded-3xl bg-white/10 backdrop-blur-md p-5 border border-white/10">
                 <p class="text-xs uppercase tracking-widest text-white/70 mb-1">
                   Période de vote
                 </p>
                 <p class="font-bold text-lg italic">
-                  À confirmer
+                  <VotingPeriodBadge client:load />
                 </p>
               </div>
 
