@@ -3,8 +3,14 @@
  * Ces valeurs sont intégrées directement dans le code et apparaîtront dans /dist
  */
 
-// Lors du build, Astro remplace import.meta.env par les valeurs réelles
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://server-miss-culture-benin-production.up.railway.app/api';
+// Lors du build, Astro remplace import.meta.env par les valeurs réelles.
+// Le repli (si VITE_API_BASE_URL n'est pas encore défini côté hébergeur,
+// ex. variables pas encore posées dans le dashboard Cloudflare Pages) doit
+// pointer vers le compartiment gbevivi et non vers /api nu (qui est celui
+// de Miss Culture Bénin) — sinon le site sert silencieusement les mauvaises
+// données tant que la variable n'est pas configurée. Bug constaté le
+// 2026-08-21 : premier déploiement Cloudflare sans les variables posées.
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://server-miss-culture-benin-production.up.railway.app/api/gbevivi';
 const WS_BASE_URL = import.meta.env.VITE_WS_BASE_URL || 'wss://server-miss-culture-benin-production.up.railway.app';
 
 //const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
