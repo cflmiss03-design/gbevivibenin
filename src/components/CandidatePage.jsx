@@ -156,24 +156,14 @@ export default function CandidatePage({ candidate }) {
           </div>
         </div>
 
-        {candidate.bio && (
+        {candidate.text && (
           <section className="mt-10 rounded-3xl border border-blue-200 bg-blue-50/70 p-6 sm:p-8 shadow-sm space-y-6">
             <h2 className="text-lg sm:text-xl font-bold text-blue-800 text-center">
               Profil officiel de la candidate
             </h2>
-            <ul className="space-y-3 text-sm sm:text-base text-blue-900">
-              <li><span className="font-semibold text-blue-700">Âge :</span> {candidate.bio.age}</li>
-              <li>
-                <span className="font-semibold text-blue-700">Professions :</span>
-                <ul className="ml-6 mt-1 list-disc">
-                  {candidate.bio.professions.map((p, i) => <li key={i}>{p}</li>)}
-                </ul>
-              </li>
-              <li><span className="font-semibold text-blue-700">Origine :</span> {candidate.bio.origin}</li>
-              <li><span className="font-semibold text-blue-700">Nourriture préférée :</span> {candidate.bio.favoriteFood}</li>
-              <li><span className="font-semibold text-blue-700">Ambitions :</span> {candidate.bio.ambitions}</li>
-            </ul>
-            <p className="mt-4 text-center font-semibold text-primary">{candidate.bio.message}</p>
+            <p className="whitespace-pre-line text-sm sm:text-base text-blue-900 leading-relaxed">
+              {candidate.text}
+            </p>
             <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4">
               <span className="text-sm sm:text-base font-medium text-blue-700">
                 Aidez-moi à aller plus loin en partageant mon profil :
