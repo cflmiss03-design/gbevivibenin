@@ -19,9 +19,9 @@ export const candidates = [
     "firstName": "Louise",
     "secondName": " Jéssougnon",
     "lastName": "KOUWAKANOU",
-    "text": "Âge : 29 ans\n\n✨ Originaire de Porto-Novo, dans le département de l'Ouémé, KOUWAKANOU Louise met fièrement à l'honneur les richesses culturelles de sa communauté. À travers la langue Goubè, elle valorise une identité linguistique qui participe à la diversité culturelle du Bénin. Elle fait également découvrir la danse de Bernadin, une expression artistique et traditionnelle qui témoigne de la richesse des pratiques culturelles de sa communauté. Côté gastronomie, elle présente avec fierté l'Akassa accompagné de viande de porc, le Hankpètè, une spécialité qui illustre le savoir-faire culinaire et les traditions de sa région. À travers sa participation à la 8ᵉ édition de Miss GBEVIVI Bénin, Louise souhaite contribuer à faire connaître et à valoriser ces richesses culturelles qui font la diversité et la fierté du patrimoine béninois.\n\nSoutenez la candidate N°2 et accompagnez-la dans cette belle aventure culturelle. 👑",
-    "slug": "votez-kouakanou-louise",
-    "photoUrl": "https://res.cloudinary.com/di21pnpda/image/upload/v1787167100/file_0000000006d881f4880f5a65e9146c9b_j6bhcn.png",
+    "text": "Âge : 29 ans\n\n✨ Originaire d'AVRANKOU, dans le département de l'Ouémé, KOUWAKANOU Louise met fièrement à l'honneur les richesses culturelles de sa communauté. À travers la langue Tori, elle valorise une identité linguistique qui participe à la diversité culturelle du Bénin. Elle fait également découvrir la danse d'Aimée HOVINOU, une expression artistique et traditionnelle qui témoigne de la richesse des pratiques culturelles de sa communauté. Côté gastronomie, elle présente avec fierté l'Akassa accompagné de viande de porc, le Hankpètè, une spécialité qui illustre le savoir-faire culinaire et les traditions de sa région. À travers sa participation à la 8ᵉ édition de Miss GBEVIVI Bénin, Louise souhaite contribuer à faire connaître et à valoriser ces richesses culturelles qui font la diversité et la fierté du patrimoine béninois.\n\nSoutenez la candidate N°2 et accompagnez-la dans cette belle aventure culturelle. 👑",
+    "slug": "votez-kouwakanou-louise",
+    "photoUrl": "https://res.cloudinary.com/di21pnpda/image/upload/v1787507118/WhatsApp_Image_2026-08-23_at_18.37.01_d4qati.jpg",
     "unitPrice": 100
   },
   {
