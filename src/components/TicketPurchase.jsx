@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { fetchAPI } from "../services/api.js";
+import { getVotingPeriod } from "../services/votingPeriod.js";
 import TicketClaimForm from "./TicketClaimForm.jsx";
 
 const MAX_QUANTITY = 20;
@@ -80,6 +81,11 @@ function StepProgress({ step, maxReached, onJump }) {
 }
 
 export default function TicketPurchase() {
+  // CHANGED: billetterie désactivée pour cet événement (voir
+  // Settings.ticketsEnabled) — `null` = pas encore vérifié (aucun rendu tant
+  // que l'état n'est pas connu, pour éviter un flash du formulaire).
+  const [ticketsEnabled, setTicketsEnabled] = useState(null);
+
   const [ticketTypes, setTicketTypes] = useState([]);
   const [loadingTypes, setLoadingTypes] = useState(true);
   const [loadError, setLoadError] = useState(null);
@@ -111,6 +117,12 @@ export default function TicketPurchase() {
   const codeCacheRef = useRef(new Map());
 
   useEffect(() => {
+    // Best-effort : en cas d'échec réseau, on suppose activé plutôt que de
+    // bloquer indéfiniment un événement qui vend réellement des tickets.
+    getVotingPeriod()
+      .then((data) => setTicketsEnabled(!!data.ticketsEnabled))
+      .catch(() => setTicketsEnabled(true));
+
     fetchAPI("/tickets/types")
       .then((data) => setTicketTypes(data))
       .catch((err) => setLoadError(err.message))
@@ -256,6 +268,19 @@ export default function TicketPurchase() {
       setSubmitError(err.message);
       setSubmitting(false);
     }
+  }
+
+  // CHANGED: billetterie désactivée — rien tant que ticketsEnabled n'est pas
+  // connu (évite le flash), puis un message à la place du formulaire.
+  if (ticketsEnabled === null) {
+    return null;
+  }
+  if (ticketsEnabled === false) {
+    return (
+      <p className="mx-auto max-w-xl text-center text-slate-500">
+        La billetterie n'est pas encore ouverte pour cet événement. Revenez bientôt !
+      </p>
+    );
   }
 
   if (loadingTypes) {

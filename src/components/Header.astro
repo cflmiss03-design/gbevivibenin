@@ -1,5 +1,6 @@
 ---
 // Header premium moderne
+import config from '../config';
 ---
 
 <header class="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-xl border-b border-slate-200/50 shadow-sm">
@@ -62,7 +63,7 @@
 
       <!-- CTA Button + Mobile Menu Toggle -->
       <div class="flex items-center gap-3">
-        <a href="/tickets" class="hidden sm:inline-flex items-center gap-2 px-5 py-2 rounded-lg border-2 border-primary-600 text-primary-600 font-semibold hover:bg-primary-50 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500">
+        <a id="ticket-nav-desktop" href="/tickets" style="display:none" class="hidden sm:inline-flex items-center gap-2 px-5 py-2 rounded-lg border-2 border-primary-600 text-primary-600 font-semibold hover:bg-primary-50 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500">
           🎟️ Acheter un ticket
         </a>
         <a href="/#candidates" class="hidden sm:inline-flex items-center gap-2 px-5 py-2 rounded-lg bg-primary-600 text-white font-semibold hover:bg-primary-700 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500">
@@ -101,7 +102,7 @@
         <a href="/sponsoring" class="px-4 py-3 text-sm font-medium text-slate-700 hover:text-primary-600 hover:bg-slate-50 transition-colors">
           Partenariat
         </a>
-        <a href="/tickets" class="mx-3 mt-2 block px-4 py-2 rounded-lg border-2 border-primary-600 text-primary-600 font-semibold text-center hover:bg-primary-50 transition-colors">
+        <a id="ticket-nav-mobile" href="/tickets" style="display:none" class="mx-3 mt-2 block px-4 py-2 rounded-lg border-2 border-primary-600 text-primary-600 font-semibold text-center hover:bg-primary-50 transition-colors">
           🎟️ Acheter un ticket
         </a>
         <a href="/#candidates" class="mx-3 my-2 block px-4 py-2 rounded-lg bg-primary-600 text-white font-semibold text-center hover:bg-primary-700 transition-colors">
@@ -110,6 +111,26 @@
       </nav>
     </div>
   </div>
+
+  <!-- CHANGED: visibilité de la billetterie (Settings.ticketsEnabled, voir
+       models/Settings.js) — masquée par défaut (style="display:none" en dur
+       sur les liens ci-dessus), révélée uniquement si l'API confirme
+       ticketsEnabled=true. Site statique sans redéploiement automatique :
+       ne peut PAS se décider au build, doit être vérifié à chaque chargement
+       de page côté client (même pattern que services/votingPeriod.js). -->
+  <script is:inline define:vars={{ apiBaseUrl: config.apiBaseUrl }}>
+    fetch(`${apiBaseUrl}/settings/voting-period`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (!data.ticketsEnabled) return;
+        document.querySelectorAll('#ticket-nav-desktop, #ticket-nav-mobile').forEach((el) => {
+          el.style.display = "";
+        });
+      })
+      .catch(() => {
+        // Best-effort : reste masqué (défaut sûr) si cet appel échoue.
+      });
+  </script>
 
   <!-- Script for mobile menu toggle -->
   <script is:inline>
