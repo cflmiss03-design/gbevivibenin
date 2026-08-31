@@ -16,6 +16,7 @@ export default function CandidateGrid({
   title = "Miss Gbévivi Bénin en Compétition",
   intro = "Participez au vote et soutenez votre candidate préférée. Chaque vote compte pour célébrer la beauté et la richesse culturelle du Bénin.",
   cardBadgeLabel = "Candidate officielle",
+  basePath = "",
 }) {
   // CHANGED (2026-08-26) : `initialCandidates` = liste figée au moment du
   // build (src/data/candidates.js, régénérée uniquement par un script local
@@ -113,6 +114,7 @@ export default function CandidateGrid({
                 rank={rankMap[candidate.id]?.label}
                 period={period}
                 badgeLabel={cardBadgeLabel}
+                basePath={basePath}
               />
             </div>
           ))}

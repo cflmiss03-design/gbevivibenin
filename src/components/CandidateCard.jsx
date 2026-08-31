@@ -5,7 +5,7 @@ import VoteModal from "./VoteModal.jsx";
 import VoteCounter from "./VoteCounter.jsx";
 import { getVotingState } from "../config";
 
-export default function CandidateCard({ candidate, rank, period, badgeLabel = "Candidate officielle" }) {
+export default function CandidateCard({ candidate, rank, period, badgeLabel = "Candidate officielle", basePath = "" }) {
   const [showModal, setShowModal] = useState(false);
   const [candidateId, setCandidateId] = useState(null);
   const [imageLoaded, setImageLoaded] = useState(true);
@@ -120,7 +120,7 @@ export default function CandidateCard({ candidate, rank, period, badgeLabel = "C
               <span>Voter</span>
             </button>
             <a
-              href={`/${candidate.slug}`}
+              href={`${basePath}/${candidate.slug}`}
               className="flex-1 inline-flex items-center justify-center gap-1.5 border-2 border-slate-200 text-primary-600 font-semibold py-2.5 px-3 rounded-lg hover:bg-slate-50 hover:border-primary-300 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 sm:py-3 sm:px-4"
             >
               <span>→</span>
