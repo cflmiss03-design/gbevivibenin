@@ -1,0 +1,89 @@
+---
+import CandidatePage from '../../components/CandidatePage.jsx';
+import { candidates as theatreCandidates } from '../../data/theatre-candidates.js';
+import Progress from "../../components/Progress.jsx";
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  return theatreCandidates.map(c => ({
+    params: { slug: c.slug }
+  }));
+}
+
+const slug = Astro.params.slug;
+const candidate = theatreCandidates.find(c => c.slug === slug);
+
+// Chaîne déjà composée (pas une fonction — non sérialisable à travers la
+// frontière Astro → île React client:load), passée telle quelle à
+// ShareButtons.jsx via CandidatePage.jsx (prop shareMessage).
+const groupShareText = `Salut !
+
+Notre groupe "${candidate.lastName}" participe au Concours de Théâtre Culturel — 1ère édition, sur le thème « Je donne de la valeur à ma culture ».
+Nous serions honorés de pouvoir compter sur votre précieux soutien tout au long de cette aventure.
+N'hésitez pas à partager notre profil et à voter pour nous.
+
+Nous vous remercions sincèrement pour votre accompagnement.`;
+
+const groupName = candidate.lastName;
+const title = `${groupName} – Concours de Théâtre Culturel | Miss Gbévivi Bénin`;
+const description = `${groupName} — Découvrez ce groupe et votez pour lui au Concours de Théâtre Culturel, 1ère édition. ${candidate.text || "Soutenez-le en ligne !"}`;
+const keywords = `${groupName}, Concours Théâtre Culturel, théâtre béninois, Miss Gbévivi Bénin, culture béninoise`;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "PerformingGroup",
+      "@id": `https://missgbevivibenin.site/theatre-culturel/${candidate.slug}/#group`,
+      "name": groupName,
+      "image": candidate.photoUrl,
+      "description": description,
+      "url": `https://missgbevivibenin.site/theatre-culturel/${candidate.slug}`
+    },
+    {
+      "@type": "Event",
+      "@id": `https://missgbevivibenin.site/theatre-culturel/${candidate.slug}/#event`,
+      "name": `Vote pour ${groupName} - Concours de Théâtre Culturel`,
+      "description": `Vote en ligne pour ${groupName} au Concours de Théâtre Culturel, 1ère édition.`,
+      "eventStatus": "EventScheduled",
+      "eventAttendanceMode": "OnlineEventAttendanceMode",
+      "url": `https://missgbevivibenin.site/theatre-culturel/${candidate.slug}`,
+      "organizer": { "@type": "Organization", "name": "Miss Gbévivi Bénin" },
+      "performer": { "@type": "PerformingGroup", "name": groupName }
+    }
+  ]
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  author="Miss Gbévivi Bénin"
+  ogTitle={title}
+  ogDescription={description}
+  ogImage={candidate.photoUrl || undefined}
+  ogType="profile"
+  twitterCard="summary_large_image"
+  robots="index, follow, max-image-preview:large"
+  structuredData={structuredData}
+>
+  <main class="min-h-screen bg-gray-50 pt-6 sm:pt-10 pb-12">
+    <div class="mx-auto max-w-7xl">
+      <CandidatePage
+        candidate={candidate}
+        pageLabel="Page officielle du groupe"
+        welcomeText="Bienvenue sur notre page officielle. Chaque vote est un soutien précieux qui rapproche notre groupe de la victoire."
+        voteButtonLabel="Voter pour ce groupe"
+        voteFooterText="Chaque vote contribue à soutenir votre groupe favori."
+        profileSectionLabel="Profil officiel du groupe"
+        shareText="Aidez-nous à aller plus loin en partageant notre profil :"
+        shareMessage={groupShareText}
+        client:load
+      />
+      <section class="px-4 py-12">
+        <Progress client:load />
+      </section>
+    </div>
+  </main>
+</BaseLayout>

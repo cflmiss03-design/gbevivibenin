@@ -5,7 +5,7 @@ import VoteModal from "./VoteModal.jsx";
 import VoteCounter from "./VoteCounter.jsx";
 import { getVotingState } from "../config";
 
-export default function CandidateCard({ candidate, rank, period }) {
+export default function CandidateCard({ candidate, rank, period, badgeLabel = "Candidate officielle" }) {
   const [showModal, setShowModal] = useState(false);
   const [candidateId, setCandidateId] = useState(null);
   const [imageLoaded, setImageLoaded] = useState(true);
@@ -72,7 +72,7 @@ export default function CandidateCard({ candidate, rank, period }) {
   <div className="min-h-[60px]">
 
     <div className="mb-2 inline-flex items-center rounded-full bg-primary-50 px-3 py-1 text-xs font-semibold text-primary-700">
-      Candidate officielle
+      {badgeLabel}
     </div>
 
     <h3 className="font-heading text-xl font-extrabold leading-tight text-slate-900 transition-colors duration-300 group-hover:text-primary-600">

@@ -4,17 +4,34 @@
  */
 
 // Lors du build, Astro remplace import.meta.env par les valeurs réelles.
-// Le repli (si VITE_API_BASE_URL n'est pas encore défini côté hébergeur,
-// ex. variables pas encore posées dans le dashboard Cloudflare Pages) doit
-// pointer vers le compartiment gbevivi et non vers /api nu (qui est celui
-// de Miss Culture Bénin) — sinon le site sert silencieusement les mauvaises
-// données tant que la variable n'est pas configurée. Bug constaté le
-// 2026-08-21 : premier déploiement Cloudflare sans les variables posées.
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://server-miss-culture-benin-production.up.railway.app/api/gbevivi';
+//
+// Origine du backend (sans préfixe /api/<tenant>) — un seul backend partagé
+// par les 2 concours de ce frontend (Miss Gbévivi Bénin + Théâtre Culturel,
+// voir backend-votes/src/config/tenants.js). Repli : même origine de
+// production que VITE_API_BASE_URL utilisait avant (compat si la variable
+// Cloudflare n'a pas encore été renommée en VITE_API_ORIGIN).
+const API_ORIGIN = (import.meta.env.VITE_API_ORIGIN || 'https://server-miss-culture-benin-production.up.railway.app').replace(/\/$/, '');
 const WS_BASE_URL = import.meta.env.VITE_WS_BASE_URL || 'wss://server-miss-culture-benin-production.up.railway.app';
 
-//const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
-//const WS_BASE_URL = import.meta.env.VITE_WS_BASE_URL || 'ws://localhost:5000/';
+// Théâtre Culturel : concours indépendant (candidats, période de vote,
+// tarif et classement propres — jamais mélangé à Miss Gbévivi) qui partage
+// ce même frontend, sous /theatre-culturel. Plutôt que de threader un
+// "apiPrefix" à travers chaque composant qui appelle fetchAPI (CandidateGrid,
+// VoteModal, VoteCounter, Progress...), on résout le bon préfixe UNE FOIS
+// ici, à partir du premier segment de l'URL courante. Ça marche parce que
+// chaque page est statique (pas un SPA) : à chaque chargement de page, ce
+// module se réinitialise avec le bon pathname. Au build (SSG, pas de
+// `window`) : aucun de ces composants n'appelle l'API pendant le build,
+// donc la valeur par défaut ne sert jamais réellement — juste là pour que
+// le code compile. Toute URL qui n'est PAS sous /theatre-culturel (accueil,
+// candidates Miss Gbévivi à la racine, galerie...) retombe sur /api/gbevivi.
+function resolveApiPrefix() {
+  if (typeof window === 'undefined') return '/api/gbevivi';
+  const firstSegment = window.location.pathname.split('/').filter(Boolean)[0];
+  return firstSegment === 'theatre-culturel' ? '/api/gbevivi-theatre' : '/api/gbevivi';
+}
+
+const API_BASE_URL = `${API_ORIGIN}${resolveApiPrefix()}`;
 
 // Dates uniquement indicatives pour les données structurées SEO (JSON-LD
 // Event). Purement statiques, à mettre à jour manuellement dans le code si

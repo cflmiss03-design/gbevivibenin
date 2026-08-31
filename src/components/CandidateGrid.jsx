@@ -10,7 +10,13 @@ function formatRank(rank) {
   return `${rank}ème`;
 }
 
-export default function CandidateGrid({ candidates: initialCandidates }) {
+export default function CandidateGrid({
+  candidates: initialCandidates,
+  eyebrow = "Découvrez nos candidates",
+  title = "Miss Gbévivi Bénin en Compétition",
+  intro = "Participez au vote et soutenez votre candidate préférée. Chaque vote compte pour célébrer la beauté et la richesse culturelle du Bénin.",
+  cardBadgeLabel = "Candidate officielle",
+}) {
   // CHANGED (2026-08-26) : `initialCandidates` = liste figée au moment du
   // build (src/data/candidates.js, régénérée uniquement par un script local
   // — voir memory/frontend_deployment.md). Un candidat ajouté/modifié depuis
@@ -84,13 +90,13 @@ export default function CandidateGrid({ candidates: initialCandidates }) {
     <section className="px-4 py-12 sm:py-16">
       <div className="mb-12 space-y-4 text-center animate-fade-up">
         <p className="text-sm font-semibold uppercase tracking-widest text-primary-600">
-          Découvrez nos candidates
+          {eyebrow}
         </p>
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-slate-900">
-          Miss Gbévivi Bénin en Compétition
+          {title}
         </h2>
         <p className="mx-auto max-w-2xl text-lg text-slate-600">
-          Participez au vote et soutenez votre candidate préférée. Chaque vote compte pour célébrer la beauté et la richesse culturelle du Bénin.
+          {intro}
         </p>
       </div>
 
@@ -106,6 +112,7 @@ export default function CandidateGrid({ candidates: initialCandidates }) {
                 candidate={candidate}
                 rank={rankMap[candidate.id]?.label}
                 period={period}
+                badgeLabel={cardBadgeLabel}
               />
             </div>
           ))}

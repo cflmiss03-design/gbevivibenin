@@ -6,6 +6,7 @@ User-agent: *
 Allow: /
 Allow: /a-propos
 Allow: /galerie
+Allow: /theatre-culturel
 Allow: /contact
 Allow: /sponsoring
 Allow: /register

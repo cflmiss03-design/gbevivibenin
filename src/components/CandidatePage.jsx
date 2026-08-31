@@ -13,7 +13,21 @@ function formatRank(rank) {
   return `${rank}ème`;
 }
 
-export default function CandidatePage({ candidate }) {
+export default function CandidatePage({
+  candidate,
+  pageLabel = "Page officielle de la candidate",
+  welcomeText = (
+    <>
+      Bienvenue sur ma page officielle.<br />
+      Chaque vote est un soutien précieux qui me rapproche de la victoire.
+    </>
+  ),
+  voteButtonLabel = "Voter pour cette candidate",
+  voteFooterText = "Chaque vote contribue à soutenir votre candidate favorite.",
+  profileSectionLabel = "Profil officiel de la candidate",
+  shareText = "Aidez-moi à aller plus loin en partageant mon profil :",
+  shareMessage,
+}) {
   const [showModal, setShowModal] = useState(false);
   const [emoji, setEmoji] = useState("");
   const [candidateId, setCandidateId] = useState(null);
@@ -84,7 +98,7 @@ export default function CandidatePage({ candidate }) {
 
         <header className="mb-8 text-center space-y-4 sm:space-y-5">
           <p className="text-sm sm:text-base font-semibold uppercase tracking-wide text-primary">
-            Page officielle de la candidate
+            {pageLabel}
           </p>
           <h1 className="font-heading text-3xl sm:text-4xl font-extrabold text-dark leading-tight">
             {candidate.firstName}{" "}
@@ -93,8 +107,7 @@ export default function CandidatePage({ candidate }) {
           </h1>
           <div className="mx-auto h-1 w-20 rounded-full bg-gradient-primary" />
           <p className="mx-auto max-w-xl text-base sm:text-lg text-gray-700 leading-relaxed">
-            Bienvenue sur ma page officielle.<br />
-            Chaque vote est un soutien précieux qui me rapproche de la victoire.
+            {welcomeText}
           </p>
           <p className="mx-auto max-w-xl text-sm sm:text-base text-gray-600 leading-relaxed">
             💙 Le processus est simple : cliquez sur <strong>Voter</strong>, choisissez le nombre de votes et validez.<br />
@@ -154,10 +167,10 @@ export default function CandidatePage({ candidate }) {
                     className="w-full rounded-2xl bg-gradient-to-r from-amber-500 via-yellow-500 to-orange-500 px-6 py-4 text-base sm:text-lg font-black text-white shadow-lg transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_15px_35px_rgba(245,158,11,0.45)] active:scale-95 flex items-center justify-center gap-3"
                   >
                     <span className="text-xl">🗳️</span>
-                    <span>Voter pour cette candidate</span>
+                    <span>{voteButtonLabel}</span>
                   </button>
                   <p className="mt-4 text-center text-xs text-white/60">
-                    Chaque vote contribue à soutenir votre candidate favorite.
+                    {voteFooterText}
                   </p>
                 </div>
               </div>
@@ -168,16 +181,16 @@ export default function CandidatePage({ candidate }) {
         {candidate.text && (
           <section className="mt-10 rounded-3xl border border-blue-200 bg-blue-50/70 p-6 sm:p-8 shadow-sm space-y-6">
             <h2 className="text-lg sm:text-xl font-bold text-blue-800 text-center">
-              Profil officiel de la candidate
+              {profileSectionLabel}
             </h2>
             <p className="whitespace-pre-line text-sm sm:text-base text-blue-900 leading-relaxed">
               {candidate.text}
             </p>
             <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4">
               <span className="text-sm sm:text-base font-medium text-blue-700">
-                Aidez-moi à aller plus loin en partageant mon profil :
+                {shareText}
               </span>
-              <ShareButtons candidate={candidate} />
+              <ShareButtons candidate={candidate} {...(shareMessage ? { shareMessage } : {})} />
             </div>
           </section>
         )}
